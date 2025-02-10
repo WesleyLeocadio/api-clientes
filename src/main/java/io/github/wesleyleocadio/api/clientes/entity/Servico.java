@@ -1,9 +1,6 @@
 package io.github.wesleyleocadio.api.clientes.entity;
 
 import java.math.BigDecimal;
-import java.util.Objects;
-
-import org.hibernate.annotations.ManyToAny;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -11,6 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.Data;
 
 @Entity
@@ -23,7 +21,7 @@ public class Servico {
 	@Column(nullable = false, length = 150)
 	private String descricao;
 	
-	@ManyToAny
+	@ManyToOne
 	@JoinColumn(name = "id_cliente")
 	private Cliente cliente;
 	
