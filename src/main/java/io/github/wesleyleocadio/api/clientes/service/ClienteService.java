@@ -31,5 +31,13 @@ public class ClienteService {
 	        return Void.TYPE;
 	    }).orElseThrow(() -> new EntityNotFoundException("Cliente não encontrado com o ID: " + id));
 	}
+
+	public void atualizar(Integer id, Cliente clienteAtualizado) {
+		  buscarPorId(id).map(cliente -> {
+			  	clienteAtualizado.setId(cliente.getId());
+		        clienteRepository.save(clienteAtualizado);
+		        return Void.TYPE;
+		    }).orElseThrow(() -> new EntityNotFoundException("Cliente não encontrado com o ID: " + id));
+	}
 	
 }
