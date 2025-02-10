@@ -1,5 +1,7 @@
 package io.github.wesleyleocadio.api.clientes.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,10 @@ public class ClienteService {
 	
 	public Cliente salvar(Cliente cliente) {	
 		return clienteRepository.save(cliente);
+	}
+
+	public Optional<Cliente> buscarPorId(Integer id) {
+		return clienteRepository.findById(id);
 	}
 	
 }

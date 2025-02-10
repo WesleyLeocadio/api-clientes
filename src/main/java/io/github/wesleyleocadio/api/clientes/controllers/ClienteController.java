@@ -1,9 +1,13 @@
 package io.github.wesleyleocadio.api.clientes.controllers;
 
 import java.net.URI;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,5 +35,13 @@ public class ClienteController {
 
         return ResponseEntity.created(location).body(clientePersistido);
     }
+	
+	@GetMapping("/{id}")
+	public ResponseEntity<Cliente> buscarPorId(@PathVariable("id") Integer id) {
+	    Optional<Cliente> clienteConsultado = clienteService.buscarPorId(id);
+	    return clienteConsultado
+	            .map(cliente -> ResponseEntity.ok(cliente))  // Retorna o cliente encontrado com status 200 (OK)
+	            .orElseGet(() -> ResponseEntity.notFound().build());  // Retorna 404 (Not Found) caso o cliente não seja encontrado
+	}
 	
 }
