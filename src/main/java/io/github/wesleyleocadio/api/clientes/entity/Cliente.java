@@ -8,6 +8,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,6 +28,11 @@ public class Cliente {
 	
 	@Column(name="data_cadastro")
 	private LocalDate dataCadastro;
+	
+	@PrePersist
+	public void prePersist() {
+		setDataCadastro(LocalDate.now());
+	}
 	
 	
 	@Override
