@@ -3,6 +3,8 @@ package io.github.wesleyleocadio.api.clientes.entity;
 import java.time.LocalDate;
 import java.util.Objects;
 
+import org.hibernate.validator.constraints.br.CPF;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.persistence.Column;
@@ -11,6 +13,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.PrePersist;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,9 +27,12 @@ public class Cliente {
 	private Integer id;
 	
 	@Column(nullable = false, length = 150)
+	@NotEmpty
 	private String nome;
 	
 	@Column(nullable = false, length = 11)
+	@NotNull
+	@CPF
 	private String cpf;
 	
 	@Column(name="data_cadastro", updatable = false)
