@@ -20,6 +20,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import io.github.wesleyleocadio.api.clientes.entity.Cliente;
 import io.github.wesleyleocadio.api.clientes.service.ClienteService;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/clientes")
@@ -29,7 +30,7 @@ public class ClienteController {
 	private ClienteService clienteService;
 	
 	@PostMapping
-    public ResponseEntity<Cliente> salvar(@RequestBody Cliente cliente) {
+    public ResponseEntity<Cliente> salvar(@RequestBody @Valid Cliente cliente) {
         Cliente clientePersistido = clienteService.salvar(cliente);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
